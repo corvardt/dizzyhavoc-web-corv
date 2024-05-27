@@ -6,7 +6,8 @@ import { IS_BROWSER } from "$fresh/runtime.ts";
 import { useSignal, Signal } from "@preact/signals";
 import { useState } from "preact/hooks";
 import { cachedData, cache } from '$fresh_charts/stats/Requests/caches/weeklyCache.tsx';
-
+import { DexcachedData } from "../../../lib/stats/Requests/caches/dexCache.tsx"
+import { getTotals } from "../../../lib/stats/getTotals.tsx"
 export function Omniweekly(props: { name: Signal<any>; type: Signal<any> }) {
   if (!IS_BROWSER) return <></>;
   const { name, type } = props;
@@ -15,7 +16,6 @@ export function Omniweekly(props: { name: Signal<any>; type: Signal<any> }) {
   const isMobile = globalThis.window.matchMedia("(pointer: coarse)").matches;
   const firstdate = useSignal<string>("");
   const lastdate = useSignal<string>("");
-
   const getPrices = async () => {
     if (cachedData[type]) {
         fetchedData.value = cachedData[type];
@@ -24,25 +24,31 @@ export function Omniweekly(props: { name: Signal<any>; type: Signal<any> }) {
         isLoading.value = false;
     } else {
       const data = await Weekly(type);
-      const weeklyData = Array.from({ length: 52 }, (_, i) => {
-        if (i < data.length) {
-          const { timestamp } = data[i];
-          const value = data[i][type];
-          return { timestamp: timestamp, [type]: value };
-        } else {
-          return {
-            timestamp: data[0].timestamp + i * 604800000,
-            [type]: 0,
-          };
-        }
-      });
+      const current = getTotals(DexcachedData)
+      const currentresult = await current
+      const weeklyData = [
+        ...data.map((item) => ({
+          timestamp: item.timestamp,
+          [type]: item[type],
+        })),
+        ...(data.length < 52
+          ? [{
+              timestamp: currentresult[0].timestamp,
+              [type]: currentresult[0][type],
+            }]
+          : []),
+        ...Array.from({ length: 52 - data.length - (data.length < 52 ? 1 : 0) }, (_, i) => ({
+          timestamp: data[data.length - 1].timestamp + (i + 1) * 604800000,
+          [type]: 0,
+        })),
+      ];
       fetchedData.value = weeklyData;
       cache(type, weeklyData); 
       const timedate = new Date(
-        fetchedData.value[0].timestamp
+      fetchedData.value[0].timestamp
       ).toLocaleDateString();
       const timedate2 = new Date(
-        fetchedData.value[fetchedData.value.length - 1].timestamp
+      fetchedData.value[fetchedData.value.length - 1].timestamp
       ).toLocaleDateString();
       firstdate.value = timedate;
       lastdate.value = timedate2;
@@ -50,9 +56,7 @@ export function Omniweekly(props: { name: Signal<any>; type: Signal<any> }) {
     }
   };
   
-  useState(() => {
-    getPrices();
-  });
+  useState(() => {getPrices()});
 
   const chartOptions = ChartOptions();
   const chartOptions_M = ChartOptions_M();

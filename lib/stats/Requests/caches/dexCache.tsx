@@ -1,10 +1,10 @@
 import { Dex } from "$fresh_charts/stats/Requests/Dex.tsx";
-export let cachedData: [] = [];
+export let DexcachedData: [] = [];
 export let state: string = "idle";
 export function cafe() {
         state = "fetching & caching...";
         let data:[] = [];
-        cachedData = data = Dex();
+        DexcachedData = data = Dex();
         state = "cached";
         return data
 }

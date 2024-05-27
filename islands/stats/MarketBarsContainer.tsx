@@ -4,7 +4,7 @@ import { useSignal } from "@preact/signals";
 import { PriceHistory } from "../../lib/stats/Requests/priceHistory.tsx";
 import { Chiffres } from "../../lib/stats/Requests/Chiffres.tsx";
 import { Omnibar } from "./marketbars/omnibar.tsx";
-import { cachedData } from "../../lib/stats/Requests/caches/dexCache.tsx";
+import { DexcachedData } from "../../lib/stats/Requests/caches/dexCache.tsx";
 import { sortby } from "../../components/stats/SettingsMenu.tsx";
 
 export function MarketBarsContainer() {
@@ -69,7 +69,7 @@ export function MarketBarsContainer() {
   const ethtooltip = useSignal<boolean>(false);
 
   const getPrices = async () => {
-    const data = cachedData;
+    const data = DexcachedData;
     const result = await data;
     timestamp.value = result[1];
     // console.log(data,'logging from function getPrices');
