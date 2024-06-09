@@ -9,8 +9,7 @@ export function Animation() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       let camera, scene, renderer, effect;
-      let cube;
-      const start = Date.now();
+      let cube, cube2;
 
       init();
 
@@ -40,8 +39,10 @@ export function Animation() {
         cube = new THREE.Mesh( geometry, material ); 
         scene.add(cube);
 
+        cube2 = new THREE.Mesh( geometry, material ); 
+        scene.add(cube2);
         renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(window.innerWidth/8, window.innerHeight/8);
         renderer.setAnimationLoop(animate);
 
         effect = new AsciiEffect(renderer, " .:-+*=%@#", { invert: true });
@@ -52,25 +53,26 @@ export function Animation() {
         if (mountRef.current) {
           mountRef.current.appendChild(effect.domElement);
         }
-
         window.addEventListener("resize", onWindowResize);
       }
 
       function onWindowResize() {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
-
         renderer.setSize(window.innerWidth, window.innerHeight);
         effect.setSize(window.innerWidth, window.innerHeight);
       }
 
       function animate() {
-        const timer = Date.now() - start;
+        cube.position.x = -20
+        cube.position.y = 300;
+        cube.rotation.x -= 0.001;
+        cube.rotation.z -= 0.003;
 
-        cube.position.y = 200;
-        cube.position.x = -25;
-        cube.rotation.x = timer * 0.0001;
-        cube.rotation.z = timer * 0.003;
+        cube2.position.x = -20
+        cube2.position.y = 100;
+        cube2.rotation.x += 0.001;
+        cube2.rotation.z += 0.003;
 
         effect.render(scene, camera);
       }
@@ -85,5 +87,5 @@ export function Animation() {
     }
   }, []);
 
-  return <div ref={mountRef} class="overflow-x-hidden" />;
+  return <div ref={mountRef} />;
 }
