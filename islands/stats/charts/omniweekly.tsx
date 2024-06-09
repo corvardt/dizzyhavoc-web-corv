@@ -38,7 +38,7 @@ export function Omniweekly(props: { name: Signal<any>; type: Signal<any> }) {
             }]
           : []),
         ...Array.from({ length: 52 - data.length - (data.length < 52 ? 1 : 0) }, (_, i) => ({
-          timestamp: data[data.length - 1].timestamp + (i + 1) * 604800000,
+          timestamp: data[data.length - 1].timestamp + (i + 2) * 604800000,
           [type]: 0,
         })),
       ];

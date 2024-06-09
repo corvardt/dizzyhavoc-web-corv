@@ -4,7 +4,7 @@ import { Tagline } from "../../components/index/Landing/Tagline.tsx";
 import { Explore } from "./LandingItems/Explore.tsx";
 import { Carousel } from "./LandingItems/Carousel.tsx";
 import { Screen } from "./LandingItems/Screen.tsx";
-import { FAQ, state } from "./LandingItems/FAQ.tsx";
+import { FAQ } from "./LandingItems/FAQ.tsx";
 
 export function Landing() {
   const [toggle, setToggle] = useState(false);
