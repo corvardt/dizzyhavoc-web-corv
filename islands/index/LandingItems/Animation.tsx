@@ -9,7 +9,7 @@ export function Animation() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       let camera, scene, renderer, effect;
-      let sphere, plane;
+      let cube;
       const start = Date.now();
 
       init();
@@ -35,11 +35,10 @@ export function Animation() {
         pointLight2.position.set(-500, -500, -500);
         scene.add(pointLight2);
 
-        sphere = new THREE.Mesh(
-          new THREE.SphereGeometry(200, 20, 10),
-          new THREE.MeshPhongMaterial({ flatShading: true })
-        );
-        scene.add(sphere);
+        const geometry = new THREE.BoxGeometry( 200, 200, 200 ); 
+        const material =  new THREE.MeshPhongMaterial({ flatShading: true })
+        cube = new THREE.Mesh( geometry, material ); 
+        scene.add(cube);
 
         renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -68,9 +67,10 @@ export function Animation() {
       function animate() {
         const timer = Date.now() - start;
 
-        sphere.position.y = Math.abs(Math.sin(timer * 0.002)) * 150;
-        sphere.rotation.x = timer * 0.0003;
-        sphere.rotation.z = timer * 0.0002;
+        cube.position.y = 200;
+        cube.position.x = -25;
+        cube.rotation.x = timer * 0.0001;
+        cube.rotation.z = timer * 0.003;
 
         effect.render(scene, camera);
       }
@@ -85,5 +85,5 @@ export function Animation() {
     }
   }, []);
 
-  return <div ref={mountRef} class={`h-[0] w-[0]`} />;
+  return <div ref={mountRef} class="overflow-x-hidden" />;
 }

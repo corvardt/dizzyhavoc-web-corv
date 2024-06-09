@@ -2,11 +2,14 @@ import { Noise } from "../components/common/backgrounds/Noise.tsx";
 import { Animation } from "../islands/index/LandingItems/Animation.tsx";
 export default function Test() {
   return (
-    <div class="h-screen w-full">
-       <div class="h-full top-0"><Noise /></div>
+    <div class="h-screen relative overflow-hidden">
 
-        <div class="absolute top-0"><Animation /></div>
+       <div class="h-full w-full top-0 absolute">
+        <Noise />
+       </div>
 
-      </div>
+       <Animation />
+
+    </div>
   );
 }
