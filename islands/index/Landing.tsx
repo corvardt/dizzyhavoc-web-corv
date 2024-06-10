@@ -23,11 +23,11 @@ export function Landing() {
         }`}
       >
         <Noise />
-        <div class="dark:invert invert-0 absolute top-0"><Animation /></div>
+        <div class="dark:invert invert-0 absolute top-[1%]"><Animation /></div>
         {!toggle ? ( // Title view
           <div class={`flex flex-col`}>
             <div
-              className={`flex flex-row gap-x-[0rem] sm:gap-x-[4rem] -translate-y-1/3 ${
+              className={`flex flex-row gap-x-[0rem] sm:gap-x-[4rem] translate-y-1/3 ${
                 hidden ? "opacity-0" : "opacity-100"
               }`}
             >
