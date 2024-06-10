@@ -26,9 +26,6 @@ export default function Error404() {
         <a href="/about" class="underline dark:text-[#d2d2d2] text-[#282828] mb-[10%]">
           about
         </a>
-        <a href="/explore" class="underline dark:text-[#d2d2d2] text-[#282828] mb-[10%]">
-          explore
-        </a>
         </div>
       </div>
     </>
