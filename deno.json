@@ -22,9 +22,7 @@
     "tailwindcss/": "npm:/tailwindcss@3.4.1/",
     "tailwindcss/plugin": "npm:/tailwindcss@3.4.1/plugin.js",
     "$std/": "https://deno.land/std@0.211.0/",
-    "@canvasjs/charts": "https://cdn.skypack.dev/@canvasjs/charts",
-    "three":"https://esm.sh/three@0.141.0",
-    "three/": "https://esm.sh/three@0.141.0/"
+    "@canvasjs/charts": "https://cdn.skypack.dev/@canvasjs/charts"
   },
   "compilerOptions": { "jsx": "react-jsx", "jsxImportSource": "preact" },
   "nodeModulesDir": true

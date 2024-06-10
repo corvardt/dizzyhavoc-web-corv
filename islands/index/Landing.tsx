@@ -23,7 +23,7 @@ export function Landing() {
         }`}
       >
         <Noise />
-        <div class="dark:invert invert-0 absolute top-[1%]"><Animation /></div>
+        <div class="dark:invert scale-anim invert-0 absolute top-[1%]"><Animation /></div>
         {!toggle ? ( // Title view
           <div class={`flex flex-col`}>
             <div

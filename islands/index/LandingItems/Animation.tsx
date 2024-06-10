@@ -9,7 +9,7 @@ export function Animation() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       let camera, scene, renderer, effect;
-      let cube, cube2;
+      let cube;
 
       init();
 
@@ -39,14 +39,12 @@ export function Animation() {
         cube = new THREE.Mesh( geometry, material ); 
         scene.add(cube);
 
-        cube2 = new THREE.Mesh( geometry, material ); 
-        scene.add(cube2);
         renderer = new THREE.WebGLRenderer();
-        renderer.setSize( window.innerWidth/1.1, window.innerHeight/2.2 );
+        renderer.setSize( window.innerWidth/2, window.innerHeight/2.5 );
         renderer.setAnimationLoop(animate);
 
         effect = new AsciiEffect(renderer, ".:-+*=%@#", { invert: true });
-        effect.setSize( window.innerWidth/1.1, window.innerHeight/2.2 );
+        effect.setSize( window.innerWidth/2, window.innerHeight/2.5 );
         effect.domElement.style.color = "gray";
 
         if (mountRef.current) {
@@ -58,8 +56,8 @@ export function Animation() {
       function onWindowResize() {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize( window.innerWidth/1.1, window.innerHeight/2.2 );
-        effect.setSize( window.innerWidth/1.1, window.innerHeight/2.2 );
+        renderer.setSize( window.innerWidth/2, window.innerHeight/2.5 );
+        effect.setSize( window.innerWidth/2, window.innerHeight/2.5 );
       }
 
       function animate() {
@@ -68,15 +66,9 @@ export function Animation() {
         cube.rotation.x -= 0.001;
         cube.rotation.z -= 0.003;
 
-        cube2.position.x = -20
-        cube2.position.y = 50;
-        cube2.rotation.x += 0.001;
-        cube2.rotation.z += 0.003;
-
         effect.render(scene, camera);
       }
 
-      // Cleanup on component unmount
       return () => {
         window.removeEventListener("resize", onWindowResize);
         if (mountRef.current) {
