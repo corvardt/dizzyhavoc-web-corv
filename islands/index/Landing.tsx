@@ -5,6 +5,7 @@ import { Explore } from "./LandingItems/Explore.tsx";
 import { Carousel } from "./LandingItems/Carousel.tsx";
 import { Screen } from "./LandingItems/Screen.tsx";
 import { FAQ } from "./LandingItems/FAQ.tsx";
+import { Animation } from "./LandingItems/Animation.tsx";
 
 export function Landing() {
   const [toggle, setToggle] = useState(false);
@@ -22,6 +23,7 @@ export function Landing() {
         }`}
       >
         <Noise />
+        <div class="dark:invert invert-0 absolute top-0"><Animation /></div>
         {!toggle ? ( // Title view
           <div class={`flex flex-col`}>
             <div

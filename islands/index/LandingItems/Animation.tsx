@@ -42,12 +42,12 @@ export function Animation() {
         cube2 = new THREE.Mesh( geometry, material ); 
         scene.add(cube2);
         renderer = new THREE.WebGLRenderer();
-        renderer.setSize( window.innerWidth/2, window.innerHeight/2 );
+        renderer.setSize( window.innerWidth/1.1, window.innerHeight/2 );
         renderer.setAnimationLoop(animate);
 
-        effect = new AsciiEffect(renderer, " .:-+*=%@#", { invert: true });
-        effect.setSize( window.innerWidth/2, window.innerHeight/2 );
-        effect.domElement.style.color = "black";
+        effect = new AsciiEffect(renderer, ".:-+*=%@#", { invert: true });
+        effect.setSize( window.innerWidth/1.1, window.innerHeight/2 );
+        effect.domElement.style.color = "gray";
 
         if (mountRef.current) {
           mountRef.current.appendChild(effect.domElement);
@@ -58,8 +58,8 @@ export function Animation() {
       function onWindowResize() {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize( window.innerWidth/2, window.innerHeight/2 );
-        effect.setSize( window.innerWidth/2, window.innerHeight/2 );
+        renderer.setSize( window.innerWidth/1.1, window.innerHeight/2 );
+        effect.setSize( window.innerWidth/1.1, window.innerHeight/2 );
       }
 
       function animate() {

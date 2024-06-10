@@ -8,7 +8,6 @@ import * as $about from "./routes/about.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $roadmap from "./routes/roadmap.tsx";
 import * as $stats from "./routes/stats.tsx";
-import * as $test from "./routes/test.tsx";
 import * as $common_menuButton from "./islands/common/menuButton.tsx";
 import * as $common_navbar from "./islands/common/navbar.tsx";
 import * as $index_Landing from "./islands/index/Landing.tsx";
@@ -39,7 +38,6 @@ const manifest = {
     "./routes/index.tsx": $index,
     "./routes/roadmap.tsx": $roadmap,
     "./routes/stats.tsx": $stats,
-    "./routes/test.tsx": $test,
   },
   islands: {
     "./islands/common/menuButton.tsx": $common_menuButton,
