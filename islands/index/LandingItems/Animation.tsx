@@ -43,7 +43,7 @@ export function Animation() {
         renderer.setSize( window.innerWidth/2, window.innerHeight/2.5 );
         renderer.setAnimationLoop(animate);
 
-        effect = new AsciiEffect(renderer, ".:-+*=%@#", { invert: true });
+        effect = new AsciiEffect(renderer, " .:-+*=%@#", { invert: true });
         effect.setSize( window.innerWidth/2, window.innerHeight/2.5 );
         effect.domElement.style.color = "gray";
 
